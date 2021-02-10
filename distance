@@ -1,0 +1,12 @@
+pip install opencage
+from opencage.geocoder import OpenCageGeocode
+key = ‘2d443c2a87a645b58686ba1d3c80593d’
+
+geocoder = OpenCageGeocode(key)
+
+query = ‘Basking Ridge NJ’ 
+results = geocoder.geocode(query)
+
+lat = results[0][‘geometry’][‘lat’]
+lng = results[0][‘geometry’][‘lng’]
+print (lat, lng)
