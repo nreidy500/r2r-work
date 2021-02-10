@@ -34,6 +34,11 @@ def priority_calc(result):
         return 0
     else:
         return result
+        
+ #compare the two numbers
+ #if they are the same (aka both 0 or same distance) then move to date needed by
+ #if one is lower than the other, lower gets priority
+
 
 print(find_distance('111 Main St, Basking Ridge, NJ','Jersey City, NJ'))
 
