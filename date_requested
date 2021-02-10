@@ -1,0 +1,11 @@
+from datetime import datetime
+
+today = datetime.today().strftime('%Y-%m-%d')
+
+def days_until_needed(date):
+    date_needed = datetime.strptime(date, "%Y-%m-%d")
+    now = datetime.strptime(today, "%Y-%m-%d")
+    how_long = (date_needed - now).days
+    return how_long
+
+print(days_until_needed("2021-2-20"))
