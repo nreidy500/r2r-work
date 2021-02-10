@@ -1,12 +1,29 @@
-pip install opencage
 from opencage.geocoder import OpenCageGeocode
-key = ‘2d443c2a87a645b58686ba1d3c80593d’
+from math import radians, cos, sin, asin, sqrt
 
-geocoder = OpenCageGeocode(key)
+def find_distance(d,r):
+    key = '2d443c2a87a645b58686ba1d3c80593d'
+    geocoder = OpenCageGeocode(key)
 
-query = ‘Basking Ridge NJ’ 
-results = geocoder.geocode(query)
+    donor_result = geocoder.geocode(d)
+    lat_d = donor_result[0]['geometry']['lat']
+    lon_d = donor_result[0]['geometry']['lng']
 
-lat = results[0][‘geometry’][‘lat’]
-lng = results[0][‘geometry’][‘lng’]
-print (lat, lng)
+    requester_result = geocoder.geocode(r)
+    lat_r = requester_result[0]['geometry']['lat']
+    lon_r = requester_result[0]['geometry']['lng']
+
+    return haversine(lon_d, lat_d, lon_r, lat_r)
+
+def haversine(lon1, lat1, lon2, lat2):
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    r = 3956
+    return c * r
+
