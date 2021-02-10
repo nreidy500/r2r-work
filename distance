@@ -1,6 +1,3 @@
-from opencage.geocoder import OpenCageGeocode
-from math import radians, cos, sin, asin, sqrt
-
 def find_distance(d,r):
     key = '2d443c2a87a645b58686ba1d3c80593d'
     geocoder = OpenCageGeocode(key)
@@ -25,6 +22,16 @@ def haversine(lon1, lat1, lon2, lat2):
     a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
     c = 2 * asin(sqrt(a))
     r = 3956
-    return c * r
+    result = c * r
 
-print(find_distance('111 Main St, Basking Ridge, NJ','500 Reef Rd, Fairfield, CT'))
+    return priority_calc(result)
+
+def priority_calc(result):
+    if result <= 50:
+        return 0
+    else:
+        return result
+
+print(find_distance('111 Main St, Basking Ridge, NJ','Jersey City, NJ'))
+
+
