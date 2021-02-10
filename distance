@@ -1,3 +1,6 @@
+from opencage.geocoder import OpenCageGeocode
+from math import radians, cos, sin, asin, sqrt
+
 def find_distance(d,r):
     key = '2d443c2a87a645b58686ba1d3c80593d'
     geocoder = OpenCageGeocode(key)
