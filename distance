@@ -27,3 +27,4 @@ def haversine(lon1, lat1, lon2, lat2):
     r = 3956
     return c * r
 
+print(find_distance('111 Main St, Basking Ridge, NJ','500 Reef Rd, Fairfield, CT'))
