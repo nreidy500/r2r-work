@@ -1,6 +1,6 @@
 from opencage.geocoder import OpenCageGeocode
 from math import radians, cos, sin, asin, sqrt
-from datetime import datetime
+from datetime import datetime, date
 
 def priority_calc(d,r):
     key = '2d443c2a87a645b58686ba1d3c80593d'
@@ -29,20 +29,21 @@ def haversine(lon1, lat1, lon2, lat2):
     result = c * r
 
     if result <= 50:
-        return days_until_needed("2021-03-20") #replace "2021-2-20" with cell data w/ date needed
+        return days_until_needed(2021, 3, 20) #replace "2021, 3, 20" with cell data w/ date needed
         # basically if the requester is less than 50 miles from donor, move to next way to calculate priority
     else:
         priority_score = result
         return priority_score
         # if the requester is more than 50 miles from donor, use miles as priority score (lower num = better score)
 
-def days_until_needed(date):
-    today = datetime.today().strftime('%Y-%m-%d')
-    date_needed = datetime.strptime(date, "%Y-%m-%d")
-    now = datetime.strptime(today, "%Y-%m-%d")
-    how_long = (date_needed - now).days
+
+today = date.today()
+
+def days_until_needed(y, m, d):
+    date_needed = date(y, m, d)
+    how_long = (date_needed - today).days
     if how_long >= 21:
-        return fifo_priority("2021-02-05") #replace "2021-02-05" with cell data w/ date requested
+        return fifo_priority(2021, 2, 5) #replace "2021, 2, 5" with cell data w/ date requested
         # if the date requested is more than 3 weeks away, move to next way to calculate priority
     else:
         priority_score = how_long
@@ -50,13 +51,13 @@ def days_until_needed(date):
         # if the date requested is less than 3 weeks away, use days as priority score  (lower num = better score)
 
 
-def fifo_priority(when):
-    d0 = datetime.strptime("2021-01-01", "%Y-%m-%d") # I set the beginning of 2021 as "day 0"
-    date_requested = datetime.strptime(when, "%Y-%m-%d")
-    priority_score = (date_requested - d0).days # calculate num of days since day 0 to reflect how early item was requested
+def fifo_priority(y, m, d):
+    date_requested = date(y, m, d)
+    priority_score = (date_requested - today).days # calculate num of days since item was requested, will be negative num
     return priority_score
 
 
 print(priority_calc('1000 5th Ave, New York, NY','558 Broadway, New York, NY'))
 # the lower the "priority score," the higher the priority
+
 
