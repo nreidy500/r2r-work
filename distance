@@ -40,6 +40,6 @@ def priority_calc(result):
      #if one is lower than the other, lower gets priority
 
 
-print(find_distance('111 Main St, Basking Ridge, NJ','Jersey City, NJ'))
+print(find_distance('19107','06824'))
 
 
