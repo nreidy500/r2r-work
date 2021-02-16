@@ -1,8 +1,9 @@
-from opencage.geocoder import OpenCageGeocode
+ import OpenCageGeocode
 from math import radians, cos, sin, asin, sqrt
 from datetime import datetime, date
 
 def priority_calc(d,r):
+
     key = '2d443c2a87a645b58686ba1d3c80593d'
     geocoder = OpenCageGeocode(key)
 
@@ -42,6 +43,7 @@ today = date.today()
 def days_until_needed(y, m, d):
     date_needed = date(y, m, d)
     how_long = (date_needed - today).days
+
     if how_long >= 21:
         return fifo_priority(2021, 2, 5) #replace "2021, 2, 5" with cell data w/ date requested
         # if the date requested is more than 3 weeks away, move to next way to calculate priority
@@ -57,8 +59,6 @@ def fifo_priority(y, m, d):
     return priority_score
 
 
-print(priority_calc('1000 5th Ave, New York, NY','558 Broadway, New York, NY')) 
-# replace those addresses with (donor address, requester address)
-# this returns "priority score," the lower the score the higher the priority
-
+print(priority_calc('1000 5th Ave, New York, NY','558 Broadway, New York, NY'))
+# the lower the "priority score," the higher the priority
 
