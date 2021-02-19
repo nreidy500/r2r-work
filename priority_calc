@@ -58,7 +58,20 @@ def fifo_priority(y, m, d):
     priority_score = (date_requested - today).days # calculate num of days since item was requested, will be negative num
     return priority_score
 
-
-print(priority_calc('1000 5th Ave, New York, NY','558 Broadway, New York, NY'))
-# the lower the "priority score," the higher the priority
+"""
+row_list = []
+def get_match(donor): # "donor" is the donor zip code
+    for data in column: # replace "column" with H column (the zip code column)
+        priority_score = priority_calc(donor, data)
+        row_list.append([priority_score, row_num]) # get the row number of the requester zip code 
+        
+    minimum = min(x[0] for x in row_list) # the best priority score is the lowest (minimum) score
+    for num, row in row_list:
+        if num == minimum:
+            match_row = row
+    return match_row
+    
+# so now I would have the row number needed to find the email     
+# the selected email is in the E column, in match_row
+"""
 
